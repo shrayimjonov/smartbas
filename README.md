@@ -30,7 +30,7 @@ card processing (Humo, Uzcard), government systems and partners.
 | Service | Purpose |
 |---|---|
 | `nci-billing` | Integration with the NCI core banking system: client info, loan payments, simulator |
-| `partner-validation` ⭐ | Merchant/partner validation with a reactive client, Flyway and Testcontainers tests |
+| `partner-validation` ⭐ | Merchant/partner transfer validation: rule-based checks, merchant/account management, audit log; WebClient gateway client, Flyway migrations |
 | `remittance-outside` ⭐, `remittance`, `leskar-server` | International money remittance integration |
 | `humo-gateway`, `humo-integration`, `humo-middleware` | Humo card processing: SOAP gateway, limits, card restrictions, verification, history |
 | `uzcard-integration`, `account-to-card` | Uzcard card operations and account-to-card transfers |
@@ -45,16 +45,16 @@ card processing (Humo, Uzcard), government systems and partners.
 | `recruiter-bot` ⭐ | Telegram recruiting bot with candidate tests |
 
 ## Tech stack
-**Java 17/21 · Spring Boot 3.x (some legacy 2.x services) · Spring Cloud (Eureka, OpenFeign, Vault) · WebFlux ·
+**Java 17/21 (legacy services on Java 8) · Spring Boot 3.x (some legacy 2.x services) · Spring Cloud (Eureka, OpenFeign, Vault) · WebFlux ·
 Oracle · PostgreSQL · ClickHouse · Kafka · Redis · MinIO · Liquibase/Flyway · Apache POI · SOAP · Jasypt ·
-Testcontainers · Docker · Maven**
+Docker · Maven**
 
 ## What I worked on
 - Report generation and **performance optimization** for very large datasets: streaming Excel generation (Apache POI SXSSF),
   `StreamingResponseBody` downloads and CSV export, which keep memory flat on multi-million-row reports.
 - Integration with the **NCI / ABS core banking** system.
 - New services end-to-end: turnover reports, loan-outside, repayment schedules, user manual, partner
-  validation and remittance.
+  validation and outbound remittance (`remittance-outside`).
 
 ## Running a service
 ```bash

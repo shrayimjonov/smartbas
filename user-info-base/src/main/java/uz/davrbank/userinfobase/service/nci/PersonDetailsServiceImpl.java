@@ -68,14 +68,14 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
             while ((line = br.readLine()) != null) {
                 String pinfl = line.trim().replaceAll("[^0-9]", "");
                 if (pinfl.length() != 14) {
-                    System.err.println("Invalid PINFL format: " + pinfl);
+                    log.warn("Skipping PINFL with invalid format (length {})", pinfl.length());
                     continue;
                 }
                 Optional<PersonDetails> existingUser = getPersonDetails(pinfl);
                 if (existingUser.isPresent()) {
                     PersonDetailsResponse response = mapUserDetailsEntityToResponse(existingUser.get());
                     responses.add(response);
-                    System.out.println("PINFL already exists in the database: " + pinfl);
+                    log.debug("Person details already cached, skipping remote lookup");
                     continue;
                 }
                 PersonDetailsRequest request = new PersonDetailsRequest(pinfl);
@@ -83,9 +83,9 @@ public class PersonDetailsServiceImpl implements PersonDetailsService {
                     PersonDetailsResponse response = feign.getUserDetails(request);
                     saveUserDetails(response);
                     responses.add(response);
-                    System.out.println("Successfully processed and saved PINFL: " + pinfl);
+                    log.debug("Person details fetched and saved");
                 } catch (Exception e) {
-                    System.err.println("Failed to fetch details for PINFL " + pinfl + ": " + e.getMessage());
+                    log.error("Failed to fetch person details: {}", e.getMessage());
                 }
             }
         } catch (Exception e) {

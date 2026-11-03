@@ -2,7 +2,7 @@
 
 > Microservice for currency wiring (accounting postings), templates, operations (BUY/SELL), document types, MFOs, payments, purposes, and admin queries.
 
-- [English](#bus-treasury-service) / [Русский](./README_ru.md)
+- [English](#bus-treasury-service) / [Русский](./README_RU.md)
 - Swagger UI: `/swagger-ui/index.html`
 - OpenAPI JSON: `/v3/api-docs`
 

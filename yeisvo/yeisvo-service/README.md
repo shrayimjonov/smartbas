@@ -62,7 +62,7 @@ the database.
 
 | No |            API name             |                                                  URL                                                   |
 |:--:|:-------------------------------:|:------------------------------------------------------------------------------------------------------:|
-| 1  |       GET CONTRACT STATUS       |             [localhost:7100/api/v1/contract/status](localhost-7100/api/v1/contract/status)             |
+| 1  |       GET CONTRACT STATUS       |             [localhost:7100/api/v1/contract/status](#localhost-7100/api/v1/contract/status)             |
 | 2  |     UPDATE CONTRACT DETAILS     |    [localhost:7100/api/v1/contract/update/details](#localhost-7100/api/v1/contract/update/details)     |
 | 3  |     GET CONTRACT OWNER DOCS     |        [localhost:7100/api/v1/contract/owner/docs](#localhost-7100/api/v1/contract/owner/docs)         |
 | 2  |      GET CONTRACT HISTORY       |           [localhost:7100/api/v1/contract/history](#localhost-7100/api/v1/contract/history)            |

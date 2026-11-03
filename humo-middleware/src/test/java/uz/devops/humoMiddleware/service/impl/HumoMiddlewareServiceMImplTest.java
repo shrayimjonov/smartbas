@@ -341,7 +341,7 @@ public class HumoMiddlewareServiceMImplTest {
             "            \"expiry\": \"2704\",\n" +
             "            \"cardSequenceNumber\": 1,\n" +
             "            \"cardholderId\": \"00051476\",\n" +
-            "            \"nameOnCard\": \"YALLAYEV ASLOM\",\n" +
+            "            \"nameOnCard\": \"TESTOV TEST\",\n" +
             "            \"accountRestrictionsFlag\": \"E\",\n" +
             "            \"commissionGroup\": \"01001\",\n" +
             "            \"cardUserId\": \"00051476\",\n" +

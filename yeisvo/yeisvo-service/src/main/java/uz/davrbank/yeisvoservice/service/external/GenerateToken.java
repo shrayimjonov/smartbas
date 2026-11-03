@@ -104,7 +104,7 @@ public class GenerateToken {
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         headers.add("Accept", "application/json");
         headers.add("Authorization", "Basic " + externalConfig.getAuthBasic());
-        headers.add("Cookie", "JSESSIONID=0C1735977C296E60C23AE8E2FADA3E35");
+        headers.add("Cookie", "JSESSIONID=REDACTED");
         return headers;
     }
 }

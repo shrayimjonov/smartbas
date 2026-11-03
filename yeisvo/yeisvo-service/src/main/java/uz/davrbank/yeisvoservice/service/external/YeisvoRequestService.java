@@ -82,7 +82,7 @@ public abstract class YeisvoRequestService {
         headers.add("Authorization", "Bearer " + generateToken.getToken().getAccess_token());
 //        headers.add("signature", "REDACTED");
 //        headers.add("timestamp", "1754387820363");
-//        headers.add("serialNumber", "365a6556390985a58b0361695c3dfad6");
+//        headers.add("serialNumber", "REDACTED");
         logger.info("Request to method getBaseHeaders done");
         return headers;
     }

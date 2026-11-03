@@ -393,7 +393,7 @@ public class CoreImpl implements CoreService {
         params.put("CODE_NAZ_PLA", "00634");
         var docNum = requestDTO.getExtId() > 0 ? requestDTO.getExtId() : requestDTO.getExtId() * -1;
         params.put("NUM_DOC", String.valueOf(docNum));
-        params.put("SIGN", "14444fb3887a4d0feb7570f40c73b805");
+        params.put("SIGN", "REDACTED");
         params.put("INN_CR", "null");
         params.put("STATE", String.valueOf(3));
         params.put("TYPE_DOC", "01");

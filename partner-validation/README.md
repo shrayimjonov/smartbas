@@ -28,29 +28,28 @@ Based on the current codebase, the implemented validation flow checks:
 |-------------|---------|-------|
 | Server port | `8081`  |  |
 | Java        | `21`    | From `pom.xml` property `java.version` |
-| Spring Boot | `4.0.3` | Parent BOM and managed dependency versions |
+| Spring Boot | `3.4.12` | Parent BOM and managed dependency versions |
 | Maven       | `3.9`   | Maven Wrapper is included in the repo |
 
 ### Dependencies from `pom.xml`
 
 | Dependency | Version | Scope |
 |----------|---------|-------|
-| `org.springframework.boot:spring-boot-starter-webmvc` | managed by Spring Boot `4.0.3` | main |
-| `org.springframework.boot:spring-boot-starter-webflux` | managed by Spring Boot `4.0.3` | main |
-| `org.springframework.boot:spring-boot-starter-validation` | managed by Spring Boot `4.0.3` | main |
-| `org.springframework.boot:spring-boot-starter-data-jpa` | managed by Spring Boot `4.0.3` | main |
-| `org.springframework.boot:spring-boot-starter-jdbc` | managed by Spring Boot `4.0.3` | main |
-| `org.flywaydb:flyway-core` | managed by Spring Boot `4.0.3` | main |
-| `org.flywaydb:flyway-database-postgresql` | managed by Spring Boot `4.0.3` | main |
-| `org.postgresql:postgresql` | managed by Spring Boot `4.0.3` | runtime |
+| `org.springframework.boot:spring-boot-starter-web` | managed by Spring Boot `3.4.12` | main |
+| `org.springframework.boot:spring-boot-starter-webflux` | managed by Spring Boot `3.4.12` | main |
+| `org.springframework.boot:spring-boot-starter-validation` | managed by Spring Boot `3.4.12` | main |
+| `org.springframework.boot:spring-boot-starter-data-jpa` | managed by Spring Boot `3.4.12` | main |
+| `org.springframework.boot:spring-boot-starter-jdbc` | managed by Spring Boot `3.4.12` | main |
+| `org.flywaydb:flyway-core` | managed by Spring Boot `3.4.12` | main |
+| `org.flywaydb:flyway-database-postgresql` | managed by Spring Boot `3.4.12` | main |
+| `org.postgresql:postgresql` | managed by Spring Boot `3.4.12` | runtime |
 | `org.mapstruct:mapstruct` | `1.6.3` | main |
-| `org.springdoc:springdoc-openapi-starter-webmvc-ui` | `3.0.0` | main |
+| `org.springdoc:springdoc-openapi-starter-webmvc-ui` | `2.8.8` | main |
+| `org.springframework.cloud:spring-cloud-starter-vault-config` | managed by Spring Cloud `2024.0.3` | main |
 | `org.projectlombok:lombok` | `1.18.38` | optional / annotation processing |
-| `org.springframework.boot:spring-boot-starter-test` | managed by Spring Boot `4.0.3` | test |
-| `org.springframework.boot:spring-boot-data-jpa-test` | managed by Spring Boot `4.0.3` | test |
-| `org.springframework.boot:spring-boot-jdbc-test` | managed by Spring Boot `4.0.3` | test |
-| `org.springframework.boot:spring-boot-testcontainers` | managed by Spring Boot `4.0.3` | test |
-| `io.projectreactor:reactor-test` | managed by Spring Boot `4.0.3` | test |
+| `org.springframework.boot:spring-boot-starter-test` | managed by Spring Boot `3.4.12` | test |
+| `org.springframework.boot:spring-boot-testcontainers` | managed by Spring Boot `3.4.12` | test |
+| `io.projectreactor:reactor-test` | managed by Spring Boot `3.4.12` | test |
 | `com.squareup.okhttp3:mockwebserver` | `5.3.0` | test |
 | `org.testcontainers:junit-jupiter` | managed by Testcontainers BOM `1.21.3` | test |
 | `org.testcontainers:postgresql` | managed by Testcontainers BOM `1.21.3` | test |
@@ -60,10 +59,13 @@ Based on the current codebase, the implemented validation flow checks:
 - Java `21`
 - Maven Wrapper (`mvnw` / `mvnw.cmd`) or a compatible local Maven installation
 - PostgreSQL
+
 Notes:
 
-- The service defines PostgreSQL configuration in profile-specific application configuration files.
-- The repository includes `docker-compose-local.yml`, but this README documents only what is visible in the application code and root resources.
+- Profile-specific configuration files (datasource, Vault, gateway credentials) were removed from this portfolio copy;
+  provide your own `application-<profile>.yml` or environment variables.
+- `docker-compose.yml` is included for container builds.
+- Test dependencies (Testcontainers, MockWebServer, reactor-test) are declared, but the test sources are not part of this copy.
 
 ## API Reference
 
@@ -822,10 +824,8 @@ src/main/java/uz/davrbank/partnervalidationservice
 
 src/main/resources
 ├── application.yml
-├── application-local.yml
-├── application-test.yml
 └── db
-    └── postgres
+    └── migration     # Flyway V1–V4 scripts
 ```
 
 ## Monitoring Steps

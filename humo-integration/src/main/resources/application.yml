@@ -42,8 +42,8 @@ logging:
     name: log/humo_integration.log
   level:
     humo.integration.card.Feign.HumoFeign.NciFeign: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_NCIFEIGN}
-    humo.integration.card.Feign.HumoFeign.HumoCardFeign: ${NG_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOCARDFEIGN}
-    humo.integration.card.Feign.HumoFeign.HumoFeign: ${OGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOFEIGN}
+    humo.integration.card.Feign.HumoFeign.HumoCardFeign: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOCARDFEIGN}
+    humo.integration.card.Feign.HumoFeign.HumoFeign: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOFEIGN}
     humo.integration.card.Service.FeignService: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_SERVICE_FEIGNSERVICE}
 
 feign:

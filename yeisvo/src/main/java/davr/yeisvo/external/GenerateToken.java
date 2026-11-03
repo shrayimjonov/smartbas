@@ -62,7 +62,7 @@ public class GenerateToken {
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
         headers.add("Accept", "application/json");
         headers.add("Authorization", "Basic "+ externalConfig.getAuthBasic());
-        headers.add("Cookie", "JSESSIONID=0C1735977C296E60C23AE8E2FADA3E35; JSESSIONID=49DF4E78D198361E108290965E4F1317");
+        headers.add("Cookie", "JSESSIONID=REDACTED; JSESSIONID=REDACTED");
         return headers;
     }
 
