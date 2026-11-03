@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+
+  - include:
+      file: db.changelog/DML/bins.sql
+      relativeToChangelogFile: false
+
+#  - include:
+#      file: db.changelog/DML/banks.sql
+#      relativeToChangelogFile: false
+
+  - include:
+      file: db.changelog/DML/error_list.sql
+      relativeToChangelogFile: false

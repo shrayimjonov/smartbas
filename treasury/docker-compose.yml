@@ -1,0 +1,17 @@
+services:
+  bus-treasury:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bus-treasury
+    ports:
+      - "7001:7001"
+    command: ["java", "-jar", "app.jar"]
+    restart: always
+    networks:
+      - bas
+
+networks:
+  bas:
+    name: bas
+    external: true

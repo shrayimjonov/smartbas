@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  humo_gateway-service:
+    image: humo_gateway-service
+    build: .
+    container_name: humo_gateway
+    ports:
+      - "8261:8261"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx1024m -Xms512m
+      - SPRING_PROFILES_ACTIVE=${CI_COMMIT_REF_NAME}
+    command: [ "java", "-Djasypt.encryptor.password=${JASYPT_ENCRYPTOR_PASSWORD}", "-jar", "app.war" ]
+    networks:
+      - gateway
+networks:
+  gateway:
+    name: gateway
+    external: true

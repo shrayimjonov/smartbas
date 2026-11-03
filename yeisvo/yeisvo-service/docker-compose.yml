@@ -1,0 +1,16 @@
+services:
+  bus-yeisvo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: yeisvo-service
+    ports:
+      - "7100:7100"
+    command: ["java", "-jar", "app.jar"]
+    restart: always
+    networks:
+      - bas
+networks:
+  bas:
+    name: bas
+    external: true

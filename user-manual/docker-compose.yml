@@ -1,0 +1,13 @@
+services:
+  api:
+    image: ""
+    ports:
+      - "7400:7400"
+    command: ["java", "-jar", "app.jar"]
+    restart: always
+    networks:
+      - bas
+networks:
+  bas:
+    name: bas
+    external: true

@@ -1,0 +1,22 @@
+services:
+  assignment-service:
+    image: assignment-image
+    build: .
+    container_name: assignment-service
+    ports:
+      - "5007:5007"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java","-jar", "app.jar"]
+#    volumes:
+#      - reports:/home
+    networks:
+      - test-hr-edu
+networks:
+  test-hr-edu:
+    name: test-hr-edu
+    external: true
+volumes:
+  reports:

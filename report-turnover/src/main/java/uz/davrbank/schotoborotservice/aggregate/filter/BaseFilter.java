@@ -1,0 +1,28 @@
+package uz.davrbank.schotoborotservice.aggregate.filter;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@Setter
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class BaseFilter {
+
+    @JsonProperty("pageNumber")
+    Integer pageNumber = 1;
+
+    @JsonProperty("pageSize")
+    Integer pageSize = 20;
+
+/*    @JsonProperty("search")
+    String search = "";
+
+    @JsonProperty("orderBy")
+    String orderBy = "id";
+
+    @JsonProperty("sortOrder")
+    String sortOrder = "desc";*/
+}

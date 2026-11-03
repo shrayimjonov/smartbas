@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "humo.middleware",
+      "type": "java.lang.String",
+      "description": "v1 api from humo middleware."
+    },
+    {
+      "name": "humo.bearer",
+      "type": "java.lang.String",
+      "description": "Humo Bearer Token for Authorization."
+    },
+    {
+      "name": "humo.humoware",
+      "type": "java.lang.String",
+      "description": "Get Humo transaction history from 127.0.0.1:9090/humoware/humoHistory server."
+    }
+  ] }

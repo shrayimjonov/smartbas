@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  humo_integration:
+    image: humo_integration
+    build: .
+  #  container_name: humo_integration
+    deploy:
+      mode: replicated
+      replicas: 2
+    ports:
+      - "8555-8556:8555"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java", "-Djasypt.encryptor.password=${JASYPT_ENCRYPTOR_PASSWORD}", "-jar", "app.war" ]
+    networks:
+      - gateway
+networks:
+  gateway:
+    name: gateway
+    external: true
+

@@ -1,0 +1,17 @@
+services:
+  filescloud-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: filescloud-service
+    ports:
+      - "7300:7300"
+    command: ["java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:57001", "/app/app.jar"]
+    restart: always
+    networks:
+      - bas
+
+networks:
+  bas:
+    name: bas
+    external: true

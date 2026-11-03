@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  uzcard_integration:
+    image: uzcard_integration-service
+    build: .
+    container_name: uzcard_integration
+    ports:
+      - "8560:8560"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=${CI_COMMIT_REF_NAME}
+    command: [ "java", "-jar", "app.war" ]
+    networks:
+      - gateway
+networks:
+  gateway:
+    name: gateway
+    external: true

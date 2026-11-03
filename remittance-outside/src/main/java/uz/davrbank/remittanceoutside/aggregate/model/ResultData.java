@@ -1,0 +1,64 @@
+package uz.davrbank.remittanceoutside.aggregate.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import uz.davrbank.remittanceoutside.aggregate.enums.ResponseStatus;
+
+import java.util.List;
+
+@Getter
+@Setter
+@ToString
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor
+public class ResultData<R> {
+    private Integer successCode;
+    private Boolean isSuccess;
+    private ResponseStatus status;
+    private R result;
+    private CodeError error;
+    private Long timeStamp = System.currentTimeMillis();
+    private Integer count;
+
+    public ResultData(R result) {
+        this.successCode = 0;
+        this.isSuccess = true;
+        this.status = ResponseStatus.SUCCESS;
+        this.result = result;
+    }
+
+    public ResultData(Integer code, Exception e) {
+        this.successCode = -1;
+        this.isSuccess = false;
+        this.status = ResponseStatus.FAILED;
+        this.error = new CodeError(code, e.getMessage());
+    }
+
+    public ResultData(CodeError coreError, boolean isSuccess) {
+        this.successCode = -1;
+        this.isSuccess = false;
+        this.status = ResponseStatus.FAILED;
+        this.error = coreError;
+    }
+
+    public static <T> ResultData<T> ok(@NotNull T body) {
+        return new ResultData<>(body);
+    }
+
+    public static ResultData<CodeError> error(CodeError error, boolean isSuccess) {
+        return new ResultData<>(error, isSuccess);
+    }
+
+
+    public static <T> ResultData<List<T>> okList(@NotNull List<T> list, int count) {
+        ResultData<List<T>> result = new ResultData<>(list);
+        result.setCount(count);
+        return result;
+    }
+}

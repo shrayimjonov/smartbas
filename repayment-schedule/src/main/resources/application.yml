@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: korinapogashenya-service
+  profiles:
+    active: prod
+server:
+  port: 7208
+  servlet:
+    context-path: /korina/pogashenya/api

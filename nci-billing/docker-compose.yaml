@@ -1,0 +1,20 @@
+version: '3.9'
+services:
+  nci-billing-service:
+    image: nci-billing
+    deploy:
+      mode: replicated
+      replicas: 2
+    build: .
+    ports:
+      - "7678-7679:7678"
+    restart: always
+    environment:
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java", "-Djasypt.encryptor.password=${JASYPT_ENCRYPTOR_PASSWORD}", "-jar", "app.jar" ]
+    networks:
+      - paymo
+networks:
+  paymo:
+    name: paymo
+    external: true

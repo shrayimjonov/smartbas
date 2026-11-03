@@ -1,0 +1,16 @@
+databaseChangeLog:
+
+  - include:
+      file: /transaction_table.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: /bill_table.yml
+      relativeToChangelogFile: true
+
+
+
+
+
+
+

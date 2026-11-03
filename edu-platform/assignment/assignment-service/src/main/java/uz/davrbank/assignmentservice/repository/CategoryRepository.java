@@ -1,0 +1,8 @@
+package uz.davrbank.assignmentservice.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import uz.davrbank.assignmentservice.aggregation.model.course.Category;
+
+public interface CategoryRepository extends JpaRepository<Category, Long>, JpaSpecificationExecutor<Category> {
+}

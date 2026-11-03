@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobs Davrbank Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #121212; color: #e0e0e0; }
+        .card { background-color: #1e1e1e; color: #e0e0e0; margin-bottom: 20px; }
+        .card-header { font-weight: bold; }
+        #logs {
+            background-color: #111;
+            padding: 15px;
+            height: 400px;
+            overflow-y: scroll;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #e0e0e0;
+        }
+        .log-error { color: #ff4c4c; }
+        .log-warn { color: #ffc107; }
+        .log-info { color: #dcdcdc; }
+        h1 { margin: 30px 0; }
+        @media (max-width: 768px) {
+            #searchInput { width: 100% !important; margin-top: 5px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <h1 class="text-center">Jobs Davrbank Dashboard</h1>
+
+    <div class="row g-3">
+        <!-- CPU Chart -->
+        <div class="col-lg-4 col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark">CPU Usage (%)</div>
+                <div class="card-body"><canvas id="cpuChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Heap Chart -->
+        <div class="col-lg-4 col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark">Heap Memory (MB)</div>
+                <div class="card-body"><canvas id="heapChart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Threads Chart -->
+        <div class="col-lg-4 col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark">Thread Count</div>
+                <div class="card-body"><canvas id="threadChart"></canvas></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logs Panel -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm mt-3">
+                <div class="card-header bg-dark d-flex flex-wrap justify-content-between align-items-center">
+                    <span>Application Logs</span>
+                    <div class="d-flex flex-wrap align-items-center">
+                        <button class="btn btn-sm btn-secondary me-1 mb-1" onclick="setFilter('ALL')">ALL</button>
+                        <button class="btn btn-sm btn-danger me-1 mb-1" onclick="setFilter('ERROR')">ERROR</button>
+                        <button class="btn btn-sm btn-warning me-1 mb-1" onclick="setFilter('WARN')">WARN</button>
+                        <button class="btn btn-sm btn-info me-1 mb-1" onclick="setFilter('INFO')">INFO</button>
+                        <input type="text" id="searchInput" placeholder="Search keyword" class="form-control form-control-sm" style="width:150px;" oninput="updateLogs()">
+                    </div>
+                </div>
+                <div class="card-body"><div id="logs">Loading logs...</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Charts ---
+    function createChart(id,label,color){
+        return new Chart(document.getElementById(id),{
+            type:'line',
+            data:{
+                labels:[],
+                datasets:[{
+                    label: label,
+                    data:[],
+                    borderColor: color,
+                    backgroundColor: color+"33",
+                    tension:0.3
+                }]
+            },
+            options:{
+                animation:false,
+                responsive:true,
+                scales:{y:{beginAtZero:true}},
+                plugins:{legend:{display:true,position:'top',labels:{color:'#e0e0e0'}}}
+            }
+        });
+    }
+
+    const cpuChart=createChart("cpuChart","CPU Usage","rgba(0,123,255,1)");
+    const heapChart=createChart("heapChart","Heap Memory (MB)","rgba(40,167,69,1)");
+    const threadChart=createChart("threadChart","Threads","rgba(255,193,7,1)");
+
+    function updateMetrics(){
+        fetch('/api/monitor')
+            .then(r=>r.json())
+            .then(m=>{
+                const t=new Date().toLocaleTimeString();
+
+                // CPU
+                cpuChart.data.labels.push(t);
+                cpuChart.data.datasets[0].data.push((m.cpu*100).toFixed(2));
+                if(cpuChart.data.labels.length>20){
+                    cpuChart.data.labels.shift();
+                    cpuChart.data.datasets[0].data.shift();
+                }
+                cpuChart.update();
+
+                // Heap
+                heapChart.data.labels.push(t);
+                heapChart.data.datasets[0].data.push((m.heap/1024/1024).toFixed(2));
+                if(heapChart.data.labels.length>20){
+                    heapChart.data.labels.shift();
+                    heapChart.data.datasets[0].data.shift();
+                }
+                heapChart.update();
+
+                // Threads
+                threadChart.data.labels.push(t);
+                threadChart.data.datasets[0].data.push(m.threads);
+                if(threadChart.data.labels.length>20){
+                    threadChart.data.labels.shift();
+                    threadChart.data.datasets[0].data.shift();
+                }
+                threadChart.update();
+            });
+    }
+
+    // --- Logs ---
+    let logsData = [];
+    let logFilter = "ALL";
+
+    function loadLogs(){
+        fetch('/api/logs')
+            .then(r=>r.json())
+            .then(lines=>{
+                logsData = lines;
+                applyFilterAndUpdate();
+            });
+    }
+
+    function setFilter(level){
+        logFilter = level;
+        applyFilterAndUpdate();
+    }
+
+    function updateLogs(){
+        applyFilterAndUpdate();
+    }
+
+    function applyFilterAndUpdate(){
+        const keyword = document.getElementById("searchInput").value.toLowerCase();
+        let filtered = logsData;
+
+        // Filter by level
+        if(logFilter !== "ALL") filtered = filtered.filter(l => l.includes(logFilter));
+        // Filter by keyword
+        if(keyword) filtered = filtered.filter(l => l.toLowerCase().includes(keyword));
+
+        const logsElem = document.getElementById("logs");
+
+        logsElem.innerHTML = filtered.map(l=>{
+            let spanClass = "log-info"; // default
+            if(l.includes("ERROR")) spanClass = "log-error";
+            else if(l.includes("WARN")) spanClass = "log-warn";
+            else if(l.includes("INFO")) spanClass = "log-info";
+
+            return `<span class="${spanClass}">${l}</span>`;
+        }).join("<br>");
+
+        logsElem.scrollTop = logsElem.scrollHeight;
+    }
+
+    // --- Intervals ---
+    setInterval(updateMetrics, 2000);
+    setInterval(loadLogs, 3000);
+</script>
+
+</body>
+</html>

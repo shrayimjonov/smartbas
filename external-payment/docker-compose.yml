@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  payment:
+    image: payment
+    build: .
+    container_name: payment
+    ports:
+      - "8805:8805"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=${CI_COMMIT_REF_NAME}
+    command: [ "java", "-jar", "app.jar" ]
+    networks:
+      - external
+networks:
+  external:
+    name: external
+    external: true
+

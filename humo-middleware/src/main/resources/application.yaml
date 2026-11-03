@@ -1,0 +1,6 @@
+humo-middleware:
+  name: humo-middleware-sample
+  simulate: true
+  token: ${HUMO_MIDDLEWARE_TOKEN}
+  url: ${HUMO_MIDDLEWARE_URL}
+  isTestHumo: true

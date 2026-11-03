@@ -1,0 +1,359 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1677733976368-1
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: hum_ban_seq
+            startValue: 35
+  - changeSet:
+      id: 1677733976368-2
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: hum_bin_seq
+            startValue: 214
+  - changeSet:
+      id: 1677733976368-3
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: hum_err_seq
+            startValue: 27
+  - changeSet:
+      id: 1677733976368-4
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: hum_log_seq
+            startValue: 1
+  - changeSet:
+      id: 1677733976368-5
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: hum_req_pro_seq
+            startValue: 1
+  - changeSet:
+      id: 1677733976368-6
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: humo_banks_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: iss_bank
+                  type: VARCHAR(255)
+              - column:
+                  name: abbreviature
+                  type: VARCHAR(255)
+              - column:
+                  name: centre_id
+                  type: VARCHAR(255)
+            schemaName: public
+            tableName: humo_banks
+  - changeSet:
+      id: 1677733976368-7
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: humo_bins_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: bank_c
+                  type: VARCHAR(255)
+              - column:
+                  name: bank_name
+                  type: VARCHAR(255)
+              - column:
+                  name: bin_code
+                  type: VARCHAR(255)
+              - column:
+                  name: card_name
+                  type: VARCHAR(255)
+              #        - column:
+              #              name: originator
+              #              type: VARCHAR(255)
+              - column:
+                  name: is_possible
+                  type: BOOLEAN
+            schemaName: public
+            tableName: humo_bins
+  - changeSet:
+      id: 1677733976368-8
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: humo_error_list_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: message
+                  type: VARCHAR(255)
+            schemaName: public
+            tableName: humo_error_list
+  - changeSet:
+      id: 1677733976368-9
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: humo_log_protocol_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: added_time
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: created_date
+                  type: date
+              - column:
+                  name: local_addr
+                  type: VARCHAR(255)
+              - column:
+                  name: local_port
+                  type: VARCHAR(255)
+              - column:
+                  name: method
+                  type: VARCHAR(255)
+              - column:
+                  name: protocol
+                  type: VARCHAR(255)
+              - column:
+                  name: remote_addr
+                  type: VARCHAR(255)
+              - column:
+                  name: remote_port
+                  type: VARCHAR(255)
+              - column:
+                  name: remote_user
+                  type: VARCHAR(255)
+              - column:
+                  name: requesturi
+                  type: VARCHAR(255)
+              - column:
+                  name: requesturl
+                  type: VARCHAR(255)
+              - column:
+                  name: server_port
+                  type: VARCHAR(255)
+              - column:
+                  name: servlet_path
+                  type: VARCHAR(255)
+            schemaName: public
+            tableName: humo_log_protocol
+  - changeSet:
+      id: 1677733976368-10
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: humo_req_protocol_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_time
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: log_protocol_id
+                  type: BIGINT
+              - column:
+                  name: param
+                  type: TEXT
+              - column:
+                  name: sub_system
+                  type: VARCHAR(255)
+            schemaName: public
+            tableName: humo_req_protocol
+  - changeSet:
+      id: 1677733976368-11
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - addUniqueConstraint:
+            columnNames: bin_code
+            constraintName: uk_6kqb9lja5xqxonb71wpte2qr5
+            schemaName: public
+            tableName: humo_bins
+  - changeSet:
+      id: 1677733976368-12
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - addUniqueConstraint:
+            columnNames: iss_bank
+            constraintName: uk_au6b3uugokhvpfxe9xnf6latj
+            schemaName: public
+            tableName: humo_banks
+  - changeSet:
+      id: 1677733976368-13
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: code
+            indexName: humo_error_code_ind
+            schemaName: public
+            tableName: humo_error_list
+  - changeSet:
+      id: 1677733976368-14
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: created_date
+            indexName: log_protocol_createddate
+            schemaName: public
+            tableName: humo_log_protocol
+  - changeSet:
+      id: 1677733976368-15
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: local_addr
+            indexName: log_protocol_localaddr
+            schemaName: public
+            tableName: humo_log_protocol
+  - changeSet:
+      id: 1677733976368-16
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: method
+            indexName: log_protocol_method
+            schemaName: public
+            tableName: humo_log_protocol
+  - changeSet:
+      id: 1677733976368-17
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: remote_addr
+            indexName: log_protocol_remoteaddr
+            schemaName: public
+            tableName: humo_log_protocol
+  - changeSet:
+      id: 1677733976368-18
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: created_time
+            indexName: req_protocol_createdtime
+            schemaName: public
+            tableName: humo_req_protocol
+  - changeSet:
+      id: 1677733976368-19
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: log_protocol_id
+            indexName: req_protocol_log
+            schemaName: public
+            tableName: humo_req_protocol
+  - changeSet:
+      id: 1677733976368-20
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: param
+            indexName: req_protocol_param
+            schemaName: public
+            tableName: humo_req_protocol
+  - changeSet:
+      id: 1677733976368-21
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: sub_system
+            indexName: req_protocol_system
+            schemaName: public
+            tableName: humo_req_protocol
+
+  - include:
+      file: /inserts.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: /originator_table.yml
+      relativeToChangelogFile: true
+
+  - include:
+      file: db.changelog/DML/add_originators.sql
+      relativeToChangelogFile: false

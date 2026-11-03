@@ -1,0 +1,86 @@
+1.Security -0% (backend +frontend) (jwt based)
+2.Swagger -0% (backend)
+3.Readme fayl yo'q -0% (backend)
+4.File upload qilishda cheklovlar yo'q -0% (Faqat .pdf pentester talabi) (backend + frontend)
+5. Input Validation -0% (Beckend)
+6. photo upload qilishda cheklovlar yo'q -0% (Faqat .jpg, .png pentester talabi) (backend + frontend)
+7.Service logikalarini optimallashtirish kk (backend)
+8. ID  encryption in all requests (FRONTEND + BACKEND) (pentester talabi IDOR) (backend + frontend)
+9. Controllerda ortiqcha keraksiz malumotlar qaytmoqda. DTO larni optimallashtirish kk (pentester talabi) (backend + frontend)
+10. CORS 'Access-Control-Allow-Origin production layerda * (backend + devops) (penteseter talabi)
+11. Filtrlar ishlamayapti (frontend + backend)
+12 Qr-code generatsiya qilish uchun service yo'q (backend and frontend)
+13. Davrbank.uz bilan integratsiya qilish kk (+/-) (backend)
+14. BOT tokenlari gitga ochiq holatda chiqib ketgan .yaml bilan(telegram bot) (backend, devops)
+15. Unit testlar yo'q (backend)
+16. Integration testlar yo'q (backend)
+17. Test ishlash service notogri logika qilingan (backend)
+18. Liquibase integrastiya for default user (Backend)
+19. login/logout api (backend + frontend)
+20. Refresh token api (backend + frontend)
+21. Password reset api (backend + frontend)
+
+
+1.Отсутствует безопасность — 0% (backend + frontend)
+Реализовать полноценную авторизацию и аутентификацию на основе JWT, включая защиту эндпоинтов и валидацию токенов.
+
+2.Swagger — 0% (backend)
+Настроить Swagger UI / OpenAPI для документации всех доступных REST-эндпоинтов.
+
+3.Отсутствие README файла — 0% (backend)
+Подготовить README с описанием проекта, инструкциями по запуску, технологиями и архитектурой.
+
+4.Отсутствуют ограничения при загрузке файлов — 0% (.pdf по требованию пентестера) (backend + frontend)
+Добавить проверку форматов и размеров файлов, разрешить только загрузку PDF.
+
+5.Input Validation — 0% (backend)
+Реализовать серверную валидацию входящих данных на всех эндпоинтах (Bean Validation).
+
+6.Отсутствуют ограничения при загрузке фотографий — 0% (.jpg, .png по требованию пентестера) (backend + frontend)
+Ограничить загрузку изображений только форматами JPG и PNG, добавить проверку размера.
+
+7.Неоптимальная сервисная логика (backend)
+Провести рефакторинг и оптимизацию бизнес-логики сервисов.
+
+8.Шифрование ID во всех запросах (frontend + backend) (требование пентестера, IDOR)
+Реализовать механизм шифрования/дешифрования идентификаторов на фронтенде и бэкенде.
+
+9.Контроллеры возвращают лишние поля — необходимо оптимизировать DTO (backend + frontend)
+Переработать DTO-модели для исключения чувствительных и избыточных данных.
+
+10.*CORS настроен с параметром ‘Access-Control-Allow-Origin: ’ в продакшене (backend + devops)
+Ограничить CORS конкретными доверенными доменами.
+
+11.Фильтры не работают (frontend + backend)
+Исправить работу фильтрации данных (query filters) на обеих сторонах.
+
+12.Отсутствует сервис генерации QR-кодов (backend + frontend)
+Реализовать модуль генерации QR-кодов и его интеграцию на фронтенде.
+
+13.Требуется интеграция с Davrbank.uz (backend)
+Настроить интеграцию с API Davrbank при необходимости (в зависимости от требований).
+
+14.Токены Telegram Bot оказались в открытом доступе в Git (.yaml) (backend + devops)
+Удалить токены из репозитория, перевести в Secret Manager / environment variables, пересоздать токены.
+
+15.Отсутствуют Unit-тесты (backend)
+Реализовать покрытие сервисов unit-тестами.
+
+16.Отсутствуют Integration-тесты (backend)
+Добавить интеграционные тесты для проверки взаимодействия модулей.
+
+17.Некорректная логика работы сервисов тестирования (backend)
+Переписать логику test-службы в соответствии с требованиями.
+
+18.Интеграция Liquibase для создания дефолтного пользователя (backend)
+Настроить автоматическое создание базового пользователя через Liquibase changelog.
+
+19.API login/logout refresh token (backend + frontend)
+Реализовать полноценные эндпоинты для входа и выхода пользователя.
+Добавить механизм обновления токена через refresh token.
+
+20.API восстановления пароля (backend + frontend)
+Реализовать функциональность сброса пароля.
+
+21. Logging and Monitoring -0% (backend + devops)
+Implement centralized logging and monitoring solutions to track application performance and errors.

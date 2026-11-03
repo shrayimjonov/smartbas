@@ -1,0 +1,19 @@
+services:
+  bus-yeisvo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bus-yeisvo
+    ports:
+      - "8181:8181"
+      - "57001:57001"
+    command: ["java", "-jar", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:57001", "/app/app.jar"]
+    restart: always
+    networks:
+      - bas
+
+networks:
+  bas:
+    name: bas
+    external: true
+

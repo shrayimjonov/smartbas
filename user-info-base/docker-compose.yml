@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  userinfo-service:
+    image: userinfo-image
+    build: .
+    container_name: userinfo-service
+    ports:
+      - "5638:5638"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java", "-jar", "app.jar" ]
+    networks:
+      - loan-file
+networks:
+  loan-file:
+    name: loan-file
+    external: true

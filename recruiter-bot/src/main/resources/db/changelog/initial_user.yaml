@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - insert:
+            tableName: user_table
+            columns:
+              - column:
+                  name: name
+                  value: "Admin User"
+              - column:
+                  name: username
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "$2a$12$REDACTEDREDACTEDREDACTEDREDACTEDREDACTEDREDACTEDREDAC"
+              - column:
+                  name: roles
+                  value: "ROLE_ADMIN"
+

@@ -1,0 +1,67 @@
+server:
+  port: 8555
+
+humo:
+  middleware_old: https://127.0.0.1
+  middleware: http://127.0.0.1
+  bearer_old: REDACTED_JWT
+  bearer: ENC(REDACTED)
+  humoware: http://127.0.0.1:9090/humoware
+  testBearer: REDACTED_JWT
+  newTestBearer: REDACTED_JWT
+
+visa:
+  url: ${VISA_URL}
+
+bank:
+  service: http://127.0.0.1:9090
+  card: ${BANK_CARD}
+  humo_api:
+    url: ${BANK_HUMO_API_URL}
+    username: ${USERNAME}
+    password: ${BANK_HUMO_API_PASSWORD}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  aop:
+    proxy-target-class: true
+
+
+logging:
+  file:
+    name: log/humo_integration.log
+  level:
+    humo.integration.card.Feign.HumoFeign.NciFeign: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_NCIFEIGN}
+    humo.integration.card.Feign.HumoFeign.HumoCardFeign: ${NG_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOCARDFEIGN}
+    humo.integration.card.Feign.HumoFeign.HumoFeign: ${OGGING_LEVEL_HUMO_INTEGRATION_CARD_FEIGN_HUMOFEIGN_HUMOFEIGN}
+    humo.integration.card.Service.FeignService: ${LOGGING_LEVEL_HUMO_INTEGRATION_CARD_SERVICE_FEIGNSERVICE}
+
+feign:
+  httpclient:
+    disable-ssl-validation: true
+    enabled: false
+  okhttp:
+    enabled: true
+  client:
+    config:
+      NciFeign:
+        read-timeout: 15000
+        connect-timeout: 120000
+#  client:
+#    config:
+#      default:
+#        connectTimeout: 1600
+
+telegram:
+  url: ${TELEGRAM_URL}
+

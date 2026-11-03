@@ -1,0 +1,12 @@
+services:
+  partner-validation-service:
+    image: partner-validation-image
+    container_name: partner-validation
+    build: .
+    ports:
+      - "8081:8081"
+    command: ["java", "-jar", "app.jar"]
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m

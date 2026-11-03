@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1704531717847-1
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: bill_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: created_by
+                  type: VARCHAR(255)
+              - column:
+                  name: created_date
+                  type: date
+              - column:
+                  name: created_time
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: modified_by
+                  type: VARCHAR(255)
+              - column:
+                  name: updated_time
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: check_request
+                  type: JSONB
+              - column:
+                  name: check_response
+                  type: JSONB
+              - column:
+                  name: pay_request
+                  type: JSONB
+              - column:
+                  name: pay_response
+                  type: JSONB
+              - column:
+                  name: request_id
+                  type: VARCHAR(255)
+              - column:
+                  name: tran_id
+                  type: BIGINT
+            schemaName: public
+            tableName: bill
+  - changeSet:
+      id: 1704531717847-3
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: tran_id
+            indexName: tranid
+            schemaName: public
+            tableName: bill
+  - changeSet:
+      id: 1704531717847-5
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: bill_seq
+            startValue: 1

@@ -1,0 +1,18 @@
+services:
+  course-service:
+    image: course-image
+    build: .
+    container_name: course-service
+    ports:
+      - "5008:5008"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java", "-jar","-Djasypt.encryptor.password=${JASYPT_ENCRYPTOR_PASSWORD}", "app.jar" ]
+    networks:
+      - test-hr-edu
+networks:
+  test-hr-edu:
+    name: test-hr-edu
+    external: true

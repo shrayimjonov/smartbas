@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: getoutsideloan-service
+  profiles:
+    active: test
+
+server:
+  port: 7211
+  servlet:
+    context-path: /get/outside/loan/api
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

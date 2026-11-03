@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  back:
+    image: recruiter_bot-back-image
+    build: .
+    container_name: recruiter_bot-back
+    ports:
+      - "5638:5638"
+    restart: always
+    environment:
+      - TZ=Asia/Tashkent
+      - JVM_OPTS=-Xmx512m -Xms256m
+    command: [ "java", "-jar", "app.jar" ]
+    networks:
+      - hr-team
+networks:
+  hr-team:
+    name: hr-team
+    external: true

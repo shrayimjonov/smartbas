@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1714449144-3
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createSequence:
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            maxValue: 9223372036854775807
+            minValue: 1
+            schemaName: public
+            sequenceName: originator_seq
+            startValue: 1
+
+  - changeSet:
+      id: 1714449144-6
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: originator_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: bank_name
+                  type: VARCHAR(64)
+              - column:
+                  name: originator
+                  type: VARCHAR(32)
+            schemaName: public
+            tableName: originator
+
+  - changeSet:
+      id: 1714449144-13
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: bank_name
+            indexName: orig_bank_ind
+            schemaName: public
+            tableName: originator
+
+  - changeSet:
+      id: 1714449144-11
+      author: ${DATABASECHANGELOG_CHANGESET_AUTHOR}
+      changes:
+        - addUniqueConstraint:
+            columnNames: bank_name
+            constraintName: orig_bank_const
+            schemaName: public
+            tableName: originator
